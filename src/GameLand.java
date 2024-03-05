@@ -37,7 +37,7 @@ public class GameLand implements Runnable {
 
     //Sets the width and height of the program window
     final int WIDTH = 1000;
-    final int HEIGHT = 700;
+    final int HEIGHT = 800;
 
     //Declare the variables needed for the graphics
     public JFrame frame;
@@ -90,8 +90,8 @@ public class GameLand implements Runnable {
         /**Step 3 add image to object**/
 
 
-        backgroundPic = Toolkit.getDefaultToolkit().getImage ("augustanational.jpg");
-        roryPic = Toolkit.getDefaultToolkit().getImage("RoryImage.png");
+        backgroundPic = Toolkit.getDefaultToolkit().getImage ("HOLE 1.png");
+      //  roryPic = Toolkit.getDefaultToolkit().getImage("RoryImage.png");
 
 
 
