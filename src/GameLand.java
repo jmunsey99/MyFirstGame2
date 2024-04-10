@@ -72,6 +72,7 @@ public class GameLand implements Runnable, KeyListener {
     public distanceMarkers hole1teeMarker1;
     public distanceMarkers hole1teeMarker2;
     
+    
 
 
 
