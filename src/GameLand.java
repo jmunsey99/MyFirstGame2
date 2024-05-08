@@ -230,7 +230,7 @@ public class GameLand implements Runnable, KeyListener, MouseListener, MouseMoti
 
         hole2blueMarker = new distanceMarkers(394, 420, 10, 10);
 
-        hole2blackMarker = new distanceMarkers(354, 420, 10, 10);
+        hole2blackMarker = new distanceMarkers(144, 318, 10, 10);
 
         hole2teeMarker1 = new distanceMarkers(900, 368, 10, 10);
 
@@ -405,7 +405,10 @@ public void moveBall() {
 
         if (golfBall != null && golfBall.rec != null && hole2 != null && hole2.rec != null) {
             if (golfBall.rec.intersects(hole2.rec) && golfBall.dx<1.5 && golfBall.dy<1.5 ) {
+                golfBall.dx = 0;
+                golfBall.dy = 0;
                 runCorrectLevel();
+
             }
         }
 

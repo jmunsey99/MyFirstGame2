@@ -26,7 +26,7 @@ public class BallorPointer {
     public double pinkMaxSpeed = 6;
     public double redMaxSpeed = 5.5;
     public double blueMaxSpeed = 5;
-    public double blackMaxSpeed = 4.5;
+    public double blackMaxSpeed = 2;
     public boolean whiteMaxSpeedAchieved;
     public boolean yellowMaxSpeedAchieved;
     public boolean cyanMaxSpeedAchieved;
@@ -348,7 +348,7 @@ public class BallorPointer {
             dx = dx + GRAVITY;
             score = score + 1;
 
-            if(dx>=4.5){
+            if(dx>=2){
                 blackMaxSpeedAchieved=true;
             }
         }
