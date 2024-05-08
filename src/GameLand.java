@@ -19,9 +19,7 @@
 //Graphics Libraries
 
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -32,7 +30,7 @@ import javax.swing.JPanel;
 //*******************************************************************************
 // Class Definition Section
 
-public class GameLand implements Runnable, KeyListener {
+public class GameLand implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
     //Variable Declaration Section
     //Declare the variables used in the program
@@ -50,41 +48,59 @@ public class GameLand implements Runnable, KeyListener {
     public BufferStrategy bufferStrategy;
 
     //Declare the objects used in the program below
-    /**STEP 0: declare**/
+    /**
+     * STEP 0: declare
+     **/
 
     public BallorPointer redPointer;
     public BallorPointer golfBall;
     public shotMeter shotMeter;
-    public golfHole hole1;
-    public bunker hole1Bunker1;
-    public bunker hole1Bunker2;
-    public bunker hole1Bunker3;
-    public bunker hole1Bunker4;
-    public bunker hole1Bunker5;
-    public distanceMarkers hole1whiteMarker;
-    public distanceMarkers hole1yellowMarker;
-    public distanceMarkers hole1cyanMarker;
-    public distanceMarkers hole1greenMarker;
-    public distanceMarkers hole1pinkMarker;
-    public distanceMarkers hole1redMarker;
-    public distanceMarkers hole1blueMarker;
-    public distanceMarkers hole1blackMarker;
-    public distanceMarkers hole1teeMarker1;
-    public distanceMarkers hole1teeMarker2;
-    
-    
+    public golfHole hole2;
+    public bunker hole2Bunker1;
+    public bunker hole2Bunker2;
+    public bunker hole2Bunker3;
+    public bunker hole2Bunker4;
+    public bunker hole2Bunker5;
+    public distanceMarkers hole2whiteMarker;
+    public distanceMarkers hole2yellowMarker;
+    public distanceMarkers hole2cyanMarker;
+    public distanceMarkers hole2greenMarker;
+    public distanceMarkers hole2pinkMarker;
+    public distanceMarkers hole2redMarker;
+    public distanceMarkers hole2blueMarker;
+    public distanceMarkers hole2blackMarker;
+    public distanceMarkers hole2teeMarker1;
+    public distanceMarkers hole2teeMarker2;
+    public boolean shotReset;
+
+    //booleans:
+    public boolean startScreen = true;
+    public boolean isPlaying = false;
+    public boolean level1;
+    public boolean level2;
+    public boolean level3;
+    public boolean gameOver;
+    public boolean redPointerWhite = false;
+    public boolean redPointerYellow = false;
+    public boolean redPointerCyan = false;
+    public boolean redPointerGreen = false;
+    public boolean redPointerPink = false;
+    public boolean redPointerRed = false;
+    public boolean redPointerBlue = false;
+    public boolean redPointerBlack = false;
+    public boolean gameRunning = false;
+    public boolean puttMade = false;
 
 
 
     //movements booleans
 
 
-
-
-    /**Step 1: declare image for object**/
+    /**
+     * Step 1: declare image for object
+     **/
 
     public Image backgroundPic;
-    public Image roryPic;
     public Image redPointerPic;
     public Image shotMeterPic;
     public Image holePic;
@@ -101,11 +117,6 @@ public class GameLand implements Runnable, KeyListener {
     public Image golfBallPic;
 
 
-
-
-
-
-
     // Main method definition: PSVM
     // This is the code that runs first and automatically
     public static void main(String[] args) {
@@ -114,134 +125,131 @@ public class GameLand implements Runnable, KeyListener {
     }
 
 
-
     // Constructor Method
     // This has no return type and has the same name as the class
     // This section is the setup portion of the program
     // Initialize your variables and construct your program objects here.
-    public GameLand()  {
+    public GameLand() {
         setUpGraphics(); //this calls the setUpGraphics() method
 
         //create (construct) the objects needed for the game below
         /**Step 2 construct object**/
 
 
-
-
-
-        redPointer = new BallorPointer (950, 300, 0, 20, 20,20);
-
-        shotMeter = new shotMeter (935, 200, 30,170);
-
-        golfBall = new BallorPointer (950, 450, 0,0, 15,15);
-
-        /** hole 1 **/
-
-        hole1 = new golfHole (150, 230, 60,60);
-
-        hole1Bunker1 = new bunker (500,510, 70, 70 );
-
-        hole1Bunker2 = new bunker (520,330, 70, 70);
-
-        hole1Bunker3 = new bunker (300, 230, 70, 70);
-
-        hole1Bunker4 = new bunker (120, 350, 70, 70);
-
-        hole1Bunker5 = new bunker (35, 190, 70, 70);
-
-        hole1whiteMarker = new distanceMarkers (550, 460, 10, 10);
-
-        hole1yellowMarker = new distanceMarkers (495, 450, 10, 10);
-
-        hole1cyanMarker = new distanceMarkers (440, 430, 10, 10);
-
-        hole1greenMarker = new distanceMarkers (395, 400, 10, 10);
-
-        hole1pinkMarker = new distanceMarkers (350, 375, 10, 10);
-
-        hole1redMarker = new distanceMarkers (300, 340, 10, 10);
-
-        hole1blueMarker = new distanceMarkers (250, 310, 10, 10);
-
-        hole1blackMarker = new distanceMarkers (175, 200, 10, 10);
-
-        hole1teeMarker1 = new distanceMarkers (950,400 , 10, 10);
-
-        hole1teeMarker2 = new distanceMarkers (950,510 , 10, 10);
-
-
-
         /** end of Hole 1 **/
-
-
-
-
-
 
 
         /**Step 3 add image to object**/
 
 
-        backgroundPic = Toolkit.getDefaultToolkit().getImage ("HOLE 1.png");
-      //  roryPic = Toolkit.getDefaultToolkit().getImage("RoryImage.png");
+        backgroundPic = Toolkit.getDefaultToolkit().getImage("HOLE 2.png");
+        //  roryPic = Toolkit.getDefaultToolkit().getImage("RoryImage.png");
 
-        redPointerPic = Toolkit.getDefaultToolkit().getImage ("redPointer.png");
+        redPointerPic = Toolkit.getDefaultToolkit().getImage("redRec.png");
 
-        shotMeterPic = Toolkit.getDefaultToolkit().getImage ("shotMeter.png");
+        shotMeterPic = Toolkit.getDefaultToolkit().getImage("shotMeter.png");
 
-        holePic = Toolkit.getDefaultToolkit().getImage ("Hole.png");
+        holePic = Toolkit.getDefaultToolkit().getImage("Hole.png");
 
-        bunkerPic = Toolkit.getDefaultToolkit().getImage ("bunker.png");
+        bunkerPic = Toolkit.getDefaultToolkit().getImage("bunker.png");
 
-        WhiteDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage ("whiteMarker.png");
+        WhiteDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage("whiteMarker.png");
 
-        YellowDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage ("yellowMarker.png");
+        YellowDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage("yellowMarker.png");
 
-        CyanDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage ("cyanMarker.png");
+        CyanDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage("cyanMarker.png");
 
-        GreenDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage ("greenMarker.png");
+        GreenDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage("greenMarker.png");
 
-        PinkDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage ("pinkMarker.png");
+        PinkDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage("pinkMarker.png");
 
-        RedDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage ("redMarker.png");
+        RedDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage("redMarker.png");
 
-        BlueDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage ("blueMarker.png");
+        BlueDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage("blueMarker.png");
 
-        BlackDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage ("blackMarker.png");
+        BlackDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage("blackMarker.png");
 
-        teeBoxDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage ("whiteMarker.png");
+        teeBoxDistanceMarkerPic = Toolkit.getDefaultToolkit().getImage("pinkMarker.png");
 
-        golfBallPic = Toolkit.getDefaultToolkit().getImage ("golfBall.png");
-
-
-
-
-
-
-
-
-
-
-
-
+        golfBallPic = Toolkit.getDefaultToolkit().getImage("golfBall.png");
 
 
     }// GameLand()
 
-//*******************************************************************************
+    //*******************************************************************************
 //User Method Section
 //
 // put your code to do things here.
+    public void runCorrectLevel() {
+
+        if (startScreen) {
+            startScreen = false;
+            level1 = true;
+            isPlaying = true;
+            startLevel1();
+
+        }
+
+
+    }
+
+    public void startLevel1() {
+
+
+        redPointer = new BallorPointer(930, 300, 0, 5, 40, 10);
+
+        shotMeter = new shotMeter(935, 200, 30, 170);
+
+        golfBall = new BallorPointer(910, 400, 0, 0, 15, 15);
+
+        /** hole 1 **/
+
+        hole2 = new golfHole(71, 368, 60, 60);
+
+        hole2Bunker1 = new bunker(314, 290, 70, 70);
+
+        hole2Bunker2 = new bunker(537, 290, 70, 70);
+
+        hole2Bunker3 = new bunker(726, 290, 70, 70);
+
+        hole2Bunker4 = new bunker(637, 495, 70, 70);
+
+        hole2Bunker5 = new bunker(451, 485, 70, 70);
+
+        hole2whiteMarker = new distanceMarkers(613, 420, 10, 10);
+
+        hole2yellowMarker = new distanceMarkers(583, 420, 10, 10);
+
+        hole2cyanMarker = new distanceMarkers(550, 420, 10, 10);
+
+        hole2greenMarker = new distanceMarkers(508, 420, 10, 10);
+
+        hole2pinkMarker = new distanceMarkers(469, 420, 10, 10);
+
+        hole2redMarker = new distanceMarkers(432, 420, 10, 10);
+
+        hole2blueMarker = new distanceMarkers(394, 420, 10, 10);
+
+        hole2blackMarker = new distanceMarkers(354, 420, 10, 10);
+
+        hole2teeMarker1 = new distanceMarkers(900, 368, 10, 10);
+
+        hole2teeMarker2 = new distanceMarkers(900, 443, 10, 10);
+
+    }
+
 
     // main thread
     // this is the code that plays the game after you set things up
     public void run() {
         //for the moment we will loop things forever using a while loop
         while (true) {
-            moveThings();  //move all the game objects
+            //moveThings();  //move all the game objects
             render();  // paint the graphics
             pause(20); // sleep for 20 ms
             collisions();
+            movePointer();
+            moveBall();
         }
     }
 
@@ -251,14 +259,14 @@ public class GameLand implements Runnable, KeyListener {
         g.clearRect(0, 0, WIDTH, HEIGHT);
 //draw our background Image below;
 
-
-
-
-            g.drawImage(backgroundPic, 0, 0, WIDTH, HEIGHT, null);
-
-
-
-            g.drawImage(roryPic, 0, 0, WIDTH, HEIGHT, null);
+        if (startScreen) {
+            g.drawString("Welcome to Rory Mcilroy Masters Challenge! After 13 years of playing in the Masters tournament in Augusta Georgia, I still have never won.", 100, 300);
+            g.drawString("How to play:", 450, 350);
+            g.drawString("Press Space Bar and Hold down, release when ready to shoot", 320, 400);
+            g.drawString("Press arrow keys to determine direction", 365, 450);
+            g.drawString("The colored squares dictate what color to aim for on the meter. Bunkers are +1 shot to your score", 220, 500);
+            g.drawString("Press 'w' to help me win my first Masters!", 370, 600);
+        }
 
 
 
@@ -266,45 +274,55 @@ public class GameLand implements Runnable, KeyListener {
         //draw the image of your objects below:
         /**Step 4: draw object images**/
 
-     /** Hole 1 **/
+        /** Hole 1 **/
 
-        g.drawImage (shotMeterPic, shotMeter.xpos, shotMeter.ypos, shotMeter.width, shotMeter.height, null);
+        if (level1 && isPlaying && backgroundPic != null && shotMeterPic != null && redPointer != null && shotMeter != null && hole2 != null && hole2Bunker2 != null && hole2Bunker3 != null && hole2Bunker4 != null && hole2Bunker5 != null && hole2whiteMarker != null && hole2yellowMarker != null && hole2cyanMarker != null && hole2greenMarker != null && hole2pinkMarker != null && hole2redMarker != null && hole2blueMarker != null && hole2blackMarker != null && hole2teeMarker1 != null && hole2teeMarker2 != null && golfBall != null) {
 
-        g.drawImage(redPointerPic, (int)redPointer.xpos, (int)redPointer.ypos, redPointer.width, redPointer.height, null );
 
-        g.drawImage (holePic, hole1.xpos, hole1.ypos, hole1.width, hole1.height, null);
 
-        g.drawImage (bunkerPic, hole1Bunker1.xpos, hole1Bunker1.ypos, hole1Bunker1.width, hole1Bunker1.height, null);
+            g.drawImage(backgroundPic, 0, 0, WIDTH, HEIGHT, null);
 
-        g.drawImage (bunkerPic, hole1Bunker2.xpos, hole1Bunker2.ypos, hole1Bunker2.width, hole1Bunker2.height, null);
+            g.drawString("Shots: " + redPointer.score,850, 150 );
+            g.drawImage(shotMeterPic, shotMeter.xpos, shotMeter.ypos, shotMeter.width, shotMeter.height, null);
 
-        g.drawImage (bunkerPic, hole1Bunker3.xpos, hole1Bunker3.ypos, hole1Bunker3.width, hole1Bunker3.height, null);
+            g.drawImage(redPointerPic, (int) redPointer.xpos, (int) redPointer.ypos, redPointer.width, redPointer.height, null);
 
-        g.drawImage (bunkerPic, hole1Bunker4.xpos, hole1Bunker4.ypos, hole1Bunker4.width, hole1Bunker4.height, null);
+            g.drawImage(holePic, hole2.xpos, hole2.ypos, hole2.width, hole2.height, null);
 
-        g.drawImage (bunkerPic, hole1Bunker5.xpos, hole1Bunker5.ypos, hole1Bunker5.width, hole1Bunker5.height, null);
+            g.drawImage(bunkerPic, hole2Bunker1.xpos, hole2Bunker1.ypos, hole2Bunker1.width, hole2Bunker1.height, null);
 
-        g.drawImage (WhiteDistanceMarkerPic, hole1whiteMarker.xpos, hole1whiteMarker.ypos, hole1whiteMarker.width, hole1whiteMarker.height, null);
+            g.drawImage(bunkerPic, hole2Bunker2.xpos, hole2Bunker2.ypos, hole2Bunker2.width, hole2Bunker2.height, null);
 
-        g.drawImage (YellowDistanceMarkerPic, hole1yellowMarker.xpos, hole1yellowMarker.ypos, hole1yellowMarker.width, hole1yellowMarker.height, null);
+            g.drawImage(bunkerPic, hole2Bunker3.xpos, hole2Bunker3.ypos, hole2Bunker3.width, hole2Bunker3.height, null);
 
-        g.drawImage (CyanDistanceMarkerPic, hole1cyanMarker.xpos, hole1cyanMarker.ypos, hole1cyanMarker.width, hole1cyanMarker.height, null);
+            g.drawImage(bunkerPic, hole2Bunker4.xpos, hole2Bunker4.ypos, hole2Bunker4.width, hole2Bunker4.height, null);
 
-        g.drawImage (GreenDistanceMarkerPic, hole1greenMarker.xpos, hole1greenMarker.ypos, hole1greenMarker.width, hole1greenMarker.height, null);
+            g.drawImage(bunkerPic, hole2Bunker5.xpos, hole2Bunker5.ypos, hole2Bunker5.width, hole2Bunker5.height, null);
 
-        g.drawImage (PinkDistanceMarkerPic, hole1pinkMarker.xpos, hole1pinkMarker.ypos, hole1pinkMarker.width, hole1pinkMarker.height, null);
+            g.drawImage(WhiteDistanceMarkerPic, hole2whiteMarker.xpos, hole2whiteMarker.ypos, hole2whiteMarker.width, hole2whiteMarker.height, null);
 
-        g.drawImage (RedDistanceMarkerPic, hole1redMarker.xpos, hole1redMarker.ypos, hole1redMarker.width, hole1redMarker.height, null);
+            g.drawImage(YellowDistanceMarkerPic, hole2yellowMarker.xpos, hole2yellowMarker.ypos, hole2yellowMarker.width, hole2yellowMarker.height, null);
 
-        g.drawImage (BlueDistanceMarkerPic, hole1blueMarker.xpos, hole1blueMarker.ypos, hole1blueMarker.width, hole1blueMarker.height, null);
+            g.drawImage(CyanDistanceMarkerPic, hole2cyanMarker.xpos, hole2cyanMarker.ypos, hole2cyanMarker.width, hole2cyanMarker.height, null);
 
-        g.drawImage (BlackDistanceMarkerPic, hole1blackMarker.xpos, hole1blackMarker.ypos, hole1blackMarker.width, hole1blackMarker.height, null);
+            g.drawImage(GreenDistanceMarkerPic, hole2greenMarker.xpos, hole2greenMarker.ypos, hole2greenMarker.width, hole2greenMarker.height, null);
 
-        g.drawImage (teeBoxDistanceMarkerPic, hole1teeMarker1.xpos, hole1teeMarker1.ypos, hole1teeMarker1.width, hole1teeMarker1.height, null);
+            g.drawImage(PinkDistanceMarkerPic, hole2pinkMarker.xpos, hole2pinkMarker.ypos, hole2pinkMarker.width, hole2pinkMarker.height, null);
 
-        g.drawImage (teeBoxDistanceMarkerPic, hole1teeMarker2.xpos, hole1teeMarker2.ypos, hole1teeMarker2.width, hole1teeMarker2.height, null);
+            g.drawImage(RedDistanceMarkerPic, hole2redMarker.xpos, hole2redMarker.ypos, hole2redMarker.width, hole2redMarker.height, null);
 
-        g.drawImage (golfBallPic, (int)golfBall.xpos, (int)golfBall.ypos, golfBall.width, golfBall.height, null);
+            g.drawImage(BlueDistanceMarkerPic, hole2blueMarker.xpos, hole2blueMarker.ypos, hole2blueMarker.width, hole2blueMarker.height, null);
+
+            g.drawImage(BlackDistanceMarkerPic, hole2blackMarker.xpos, hole2blackMarker.ypos, hole2blackMarker.width, hole2blackMarker.height, null);
+
+            g.drawImage(teeBoxDistanceMarkerPic, hole2teeMarker1.xpos, hole2teeMarker1.ypos, hole2teeMarker1.width, hole2teeMarker1.height, null);
+
+            g.drawImage(teeBoxDistanceMarkerPic, hole2teeMarker2.xpos, hole2teeMarker2.ypos, hole2teeMarker2.width, hole2teeMarker2.height, null);
+
+            g.drawImage(golfBallPic, (int) golfBall.xpos, (int) golfBall.ypos, golfBall.width, golfBall.height, null);
+
+
+        }
 
 
         /** End of Hole 1 **/
@@ -313,31 +331,83 @@ public class GameLand implements Runnable, KeyListener {
 
         g.dispose();
 
+        if (gameOver) {
+
+
+        }
+
 
         bufferStrategy.show();
     }
 
+public void movePointer(){
+
+        if (redPointer!=null){
+
+            redPointer.pointerBouncing();
+        }
+
+}
+public void moveBall() {
+
+    if (redPointer != null && redPointer.ypos < 220 && gameRunning && shotReset) {
+        redPointerWhite = true;
+        golfBall.whiteMove();
 
 
-    public void moveThings() {
+
+    } else if (redPointer != null && redPointer.ypos > 220 && redPointer.ypos <= 240 && gameRunning && shotReset) {
+        redPointerYellow = true;
 
 
-        redPointer.pointerBouncing();
+        golfBall.yellowMove();
 
 
+    } else if (redPointer != null && redPointer.ypos > 240 && redPointer.ypos <= 260 && gameRunning && shotReset) {
+        redPointerCyan = true;
 
-        golfBall.move();
+        golfBall.cyanMove();
 
 
+    } else if (redPointer != null && redPointer.ypos > 260 && redPointer.ypos <= 280 && gameRunning && shotReset) {
+        redPointerGreen = true;
+        golfBall.greenMove();
 
 
+    } else if (redPointer != null && redPointer.ypos > 280 && redPointer.ypos <= 300 && gameRunning && shotReset) {
+        redPointerPink = true;
+        golfBall.pinkMove();
+
+
+    } else if (redPointer != null && redPointer.ypos > 300 && redPointer.ypos <= 320 && gameRunning && shotReset) {
+        redPointerRed = true;
+        redPointer.redMove();
+
+
+    } else if (redPointer != null && redPointer.ypos > 320 && redPointer.ypos <= 340 && gameRunning && shotReset) {
+        redPointerBlue = true;
+        golfBall.blueMove();
+
+    } else if (redPointer != null && redPointer.ypos > 340 && redPointer.ypos <= 360 && gameRunning && shotReset) {
+        redPointerBlack = true;
+        golfBall.blackMove();
     }
 
 
 
 
+}
 
-    public void collisions () {
+
+
+
+    public void collisions() {
+
+        if (golfBall != null && golfBall.rec != null && hole2 != null && hole2.rec != null) {
+            if (golfBall.rec.intersects(hole2.rec) && golfBall.dx<1.5 && golfBall.dy<1.5 ) {
+                runCorrectLevel();
+            }
+        }
 
 
     }
@@ -366,6 +436,8 @@ public class GameLand implements Runnable, KeyListener {
         canvas.setBounds(0, 0, WIDTH, HEIGHT);
         canvas.setIgnoreRepaint(true);
         canvas.addKeyListener(this);
+        canvas.addMouseListener(this);
+        canvas.addMouseMotionListener(this);
         panel.add(canvas);  // adds the canvas to the panel.
 
         // frame operations
@@ -380,6 +452,7 @@ public class GameLand implements Runnable, KeyListener {
         canvas.requestFocus();
         System.out.println("DONE graphic setup");
     }
+
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -410,6 +483,8 @@ public class GameLand implements Runnable, KeyListener {
 
         if (keyCode == 32) {
             redPointer.spacePressed = true;
+            shotReset=false;
+
         }
 
 
@@ -422,28 +497,77 @@ public class GameLand implements Runnable, KeyListener {
         int keyCode = e.getKeyCode();
         System.out.println("Key: " + key + " KeyCode: " + keyCode);
 
-        if (keyCode == 37 ){
-            redPointer.leftPressed=false;
+        if (keyCode == 37) {
+            redPointer.leftPressed = false;
         }
 
-        if (keyCode == 38 ){
-            redPointer.upPressed=false;
+        if (keyCode == 38) {
+            redPointer.upPressed = false;
         }
 
-        if (keyCode == 39 ){
-            redPointer.rightPressed=false;
+        if (keyCode == 39) {
+            redPointer.rightPressed = false;
         }
 
-        if (keyCode == 40 ){
-            redPointer.downPressed=false;
+        if (keyCode == 40) {
+            redPointer.downPressed = false;
         }
 
-        if (keyCode == 32){
-            redPointer.spacePressed=false;
+        if (keyCode == 32 && redPointer != null) {
+
+            redPointer.spacePressed = false;
+            gameRunning = true;
+            shotReset=true;
+
+
+
         }
 
-     
+        // eventually I am going to call a method that chooses each hole
+        if (keyCode == 87) {
+            runCorrectLevel();
 
+        }
+    }
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+
+
+    }
+
+    public void mouseReleased (MouseEvent e) {
+
+
+        System.out.println("(" + e.getX() + "," + e.getY() + ")");
+
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
 
     }
 }

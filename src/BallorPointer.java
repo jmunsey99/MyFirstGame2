@@ -16,9 +16,28 @@ public class BallorPointer {
     public boolean rightPressed;
     public boolean upPressed;
     public boolean downPressed;
-    public boolean spacePressed;
+    public boolean spacePressed=false;
     public double GRAVITY = 0.1;
-    public boolean isJumping=false;
+    public boolean isShot = false;
+    public double whiteMaxSpeed = 8;
+    public double yellowMaxSpeed = 7.5;
+    public double cyanMaxSpeed = 7;
+    public double greenMaxSpeed = 6.5;
+    public double pinkMaxSpeed = 6;
+    public double redMaxSpeed = 5.5;
+    public double blueMaxSpeed = 5;
+    public double blackMaxSpeed = 4.5;
+    public boolean whiteMaxSpeedAchieved;
+    public boolean yellowMaxSpeedAchieved;
+    public boolean cyanMaxSpeedAchieved;
+    public boolean greenMaxSpeedAchieved;
+    public boolean pinkMaxSpeedAchieved;
+    public boolean redMaxSpeedAchieved;
+    public boolean blueMaxSpeedAchieved;
+    public boolean blackMaxSpeedAchieved;
+    public int score = 0;
+    public boolean puttMade;
+
 
     public BallorPointer(double pXpos, double pYpos, double pDx, double pDy, int pWidth, int pHeight) {
         xpos = pXpos;
@@ -28,9 +47,12 @@ public class BallorPointer {
         width = pWidth;
         height = pHeight;
         isAlive = true;
-        rec = new Rectangle((int)xpos, (int)ypos, width, height);
+        rec = new Rectangle((int) xpos, (int) ypos, width, height);
 
     }
+
+
+
 
     public void printInfo() {
         System.out.println("x position: " + xpos);
@@ -43,24 +65,327 @@ public class BallorPointer {
 
     }
 
-    public void move() {
+    public void whiteMove() {
 
-        dx = dx + GRAVITY;
+        if (dx < whiteMaxSpeed && !whiteMaxSpeedAchieved && !spacePressed) {
+            dx = dx + GRAVITY;
+            score = score + 1;
 
-        // Check if jump is pressed and the hero is on the ground
-        if (isJumping && (xpos + width) >= 1000) {
-            dx = 5; // Adjust the jump height as needed
+            if(dx>8){
+                whiteMaxSpeedAchieved=true;
+            }
         }
-        //Check if you aren't jumping. Then when you hit the ground, stop falling due to gravity.
-        if (isJumping==false && (xpos + width) >= 1000){
-            dx=0;
+        if (whiteMaxSpeedAchieved && dx>0){
+            dx = dx - GRAVITY;
+
         }
+
+        if (leftPressed && !spacePressed && dx!=0){
+            xpos = xpos - dx;
+        }
+
+        if (rightPressed && !spacePressed && dx!=0){
+            xpos = xpos + dx;
+        }
+
+        if (upPressed && !spacePressed && dx!=0){
+            ypos = ypos - dy;
+        }
+
+        if (downPressed && !spacePressed && dx!=0){
+            ypos = ypos + dy;
+        }
+
+
+
+
+
+
+        xpos=xpos - dx;
+        ypos= ypos+ dy;
+
+
+    }
+
+    public void yellowMove() {
+
+        if (dx < yellowMaxSpeed && !yellowMaxSpeedAchieved && !spacePressed ) {
+            dx = dx + GRAVITY;
+            score = score + 1;
+
+            if(dx>7.5){
+                yellowMaxSpeedAchieved=true;
+            }
+        }
+        if (yellowMaxSpeedAchieved && dx>0){
+            dx = dx - GRAVITY;
+
+        }
+
+        if (leftPressed && !spacePressed && dx!=0){
+            xpos = xpos - dx;
+        }
+
+        if (rightPressed && !spacePressed && dx!=0){
+            xpos = xpos + dx;
+        }
+
+        if (upPressed && !spacePressed && dx!=0 ){
+            ypos = ypos - dy;
+        }
+
+        if (downPressed && !spacePressed && dx!=0){
+            ypos = ypos + dy;
+        }
+
+
+
         // Update position
         xpos=xpos - dx;
         ypos= ypos+ dy;
 
 
     }
+    public void cyanMove() {
+
+        if (dx < cyanMaxSpeed && !cyanMaxSpeedAchieved && !spacePressed) {
+            dx = dx + GRAVITY;
+            score = score + 1;
+
+            if(dx>7){
+                cyanMaxSpeedAchieved=true;
+            }
+        }
+        if (cyanMaxSpeedAchieved && dx>0){
+            dx = dx - GRAVITY;
+
+        }
+
+        if (leftPressed && !spacePressed && dx!=0){
+            xpos = xpos - dx;
+        }
+
+        if (rightPressed && !spacePressed && dx!=0){
+            xpos = xpos + dx;
+        }
+
+        if (upPressed && !spacePressed && dx!=0){
+            ypos = ypos - dy;
+        }
+
+        if (downPressed && !spacePressed && dx!=0){
+            ypos = ypos + dy;
+        }
+
+
+        // Update position
+        xpos=xpos - dx;
+        ypos= ypos+ dy;
+
+
+    }
+    public void greenMove() {
+
+        if (dx < greenMaxSpeed && !greenMaxSpeedAchieved && !spacePressed) {
+            dx = dx + GRAVITY;
+            score = score + 1;
+
+            if(dx>6.5){
+                greenMaxSpeedAchieved=true;
+            }
+        }
+        if (greenMaxSpeedAchieved && dx>0){
+            dx = dx - GRAVITY;
+
+        }
+
+        if (leftPressed && !spacePressed && dx!=0){
+            xpos = xpos - dx;
+        }
+
+        if (rightPressed && !spacePressed && dx!=0){
+            xpos = xpos + dx;
+        }
+
+        if (upPressed && !spacePressed && dx!=0){
+            ypos = ypos - dy;
+        }
+
+        if (downPressed && !spacePressed && dx!=0){
+            ypos = ypos + dy;
+        }
+
+
+
+        // Update position
+        xpos=xpos - dx;
+        ypos= ypos+ dy;
+
+
+    }
+    public void pinkMove() {
+
+        if (dx < pinkMaxSpeed && !pinkMaxSpeedAchieved && !spacePressed) {
+            dx = dx + GRAVITY;
+            score = score + 1;
+
+            if(dx>6){
+                pinkMaxSpeedAchieved=true;
+            }
+        }
+        if (pinkMaxSpeedAchieved && dx>0){
+            dx = dx - GRAVITY;
+
+        }
+
+        if (leftPressed && !spacePressed && dx!=0){
+            xpos = xpos - dx;
+        }
+
+        if (rightPressed && !spacePressed && dx!=0){
+            xpos = xpos + dx;
+        }
+
+        if (upPressed && !spacePressed && dx!=0){
+            ypos = ypos - dy;
+        }
+
+        if (downPressed && !spacePressed && dx!=0){
+            ypos = ypos + dy;
+        }
+
+
+
+
+        // Update position
+        xpos=xpos - dx;
+        ypos= ypos+ dy;
+
+
+    }
+    public void redMove() {
+
+        if (dx < redMaxSpeed && !redMaxSpeedAchieved && !spacePressed) {
+            dx = dx + GRAVITY;
+            score = score + 1;
+
+            if(dx>5.5){
+                redMaxSpeedAchieved=true;
+            }
+        }
+        if (redMaxSpeedAchieved && dx>0){
+            dx = dx - GRAVITY;
+
+        }
+
+        if (leftPressed && !spacePressed && dx!=0){
+            xpos = xpos - dx;
+        }
+
+        if (rightPressed && !spacePressed && dx!=0){
+            xpos = xpos + dx;
+        }
+
+        if (upPressed && !spacePressed && dx!=0){
+            ypos = ypos - dy;
+        }
+
+        if (downPressed && !spacePressed && dx!=0){
+            ypos = ypos + dy;
+        }
+
+
+
+        // Update position
+        xpos=xpos - dx;
+        ypos= ypos+ dy;
+
+
+    }
+    public void blueMove() {
+
+        if (dx < blueMaxSpeed && !blueMaxSpeedAchieved && !spacePressed) {
+            dx = dx + GRAVITY;
+            score = score + 1;
+
+            if(dx>5){
+                blueMaxSpeedAchieved=true;
+            }
+        }
+        if (blueMaxSpeedAchieved && dx>0){
+            dx = dx - GRAVITY;
+
+        }
+
+        if (leftPressed && !spacePressed && dx!=0){
+            xpos = xpos - dx;
+        }
+
+        if (rightPressed && !spacePressed && dx!=0){
+            xpos = xpos + dx;
+        }
+
+        if (upPressed && !spacePressed && dx!=0){
+            ypos = ypos - dy;
+        }
+
+        if (downPressed && !spacePressed && dx!=0){
+            ypos = ypos + dy;
+        }
+
+
+
+
+        // Update position
+        xpos=xpos - dx;
+        ypos= ypos+ dy;
+
+
+    }
+    public void blackMove() {
+
+        if (dx < blackMaxSpeed && !blackMaxSpeedAchieved && !spacePressed) {
+            dx = dx + GRAVITY;
+            score = score + 1;
+
+            if(dx>=4.5){
+                blackMaxSpeedAchieved=true;
+            }
+        }
+        if (blackMaxSpeedAchieved && dx>0){
+            dx = dx - GRAVITY;
+
+        }
+
+        if (leftPressed && !spacePressed && dx!=0){
+            xpos = xpos - dx;
+        }
+
+        if (rightPressed && !spacePressed && dx!=0){
+            xpos = xpos + dx;
+        }
+
+        if (upPressed && !spacePressed && dx!=0){
+            ypos = ypos - dy;
+        }
+
+        if (downPressed && !spacePressed && dx!=0){
+            ypos = ypos + dy;
+        }
+
+
+
+
+
+
+
+        // Update position
+        xpos=xpos - dx;
+        ypos= ypos+ dy;
+
+
+    }
+
 
     public void wrappingMove() {
         // Move the hero
@@ -110,22 +435,25 @@ public class BallorPointer {
 
     public void pointerBouncing() {
 
-        if(spacePressed==true) {
+        if(spacePressed) {
 
-            if (ypos > 350) {
+            if (ypos > 350 + height) {
                 dy = -dy;
             }
-            if (ypos < 180 + height) {
+            if (ypos < 200) {
                 dy = -dy;
             }
 
-
-            xpos = xpos + dx;
             ypos = ypos + dy;
 
         }
 
+
+
+
     }
+
+
 
 
 
