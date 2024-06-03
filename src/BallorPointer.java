@@ -35,7 +35,8 @@ public class BallorPointer {
     public boolean redMaxSpeedAchieved;
     public boolean blueMaxSpeedAchieved;
     public boolean blackMaxSpeedAchieved;
-    public int score = 0;
+   // public int score = 0;
+    public double verticalSpeed = 0.5;
     public boolean puttMade;
 
 
@@ -69,7 +70,7 @@ public class BallorPointer {
 
         if (dx < whiteMaxSpeed && !whiteMaxSpeedAchieved && !spacePressed) {
             dx = dx + GRAVITY;
-            score = score + 1;
+         //   score = score + 1;
 
             if(dx>8){
                 whiteMaxSpeedAchieved=true;
@@ -80,21 +81,20 @@ public class BallorPointer {
 
         }
 
-        if (leftPressed && !spacePressed && dx!=0){
-            xpos = xpos - dx;
+
+        if (upPressed && dx!=0){
+            ypos = ypos - verticalSpeed;
         }
 
-        if (rightPressed && !spacePressed && dx!=0){
-            xpos = xpos + dx;
+        if (downPressed && dx!=0){
+            ypos = ypos + verticalSpeed;
         }
 
-        if (upPressed && !spacePressed && dx!=0){
-            ypos = ypos - dy;
+        if (xpos<=80){
+            dx=0;
         }
 
-        if (downPressed && !spacePressed && dx!=0){
-            ypos = ypos + dy;
-        }
+
 
 
 
@@ -105,13 +105,16 @@ public class BallorPointer {
         ypos= ypos+ dy;
 
 
+        rec = new Rectangle((int) xpos, (int) ypos, width, height);
+
+
     }
 
     public void yellowMove() {
 
         if (dx < yellowMaxSpeed && !yellowMaxSpeedAchieved && !spacePressed ) {
             dx = dx + GRAVITY;
-            score = score + 1;
+       //     score = score + 1;
 
             if(dx>7.5){
                 yellowMaxSpeedAchieved=true;
@@ -122,20 +125,18 @@ public class BallorPointer {
 
         }
 
-        if (leftPressed && !spacePressed && dx!=0){
-            xpos = xpos - dx;
+
+
+        if (upPressed && dx!=0){
+            ypos = ypos - verticalSpeed;
         }
 
-        if (rightPressed && !spacePressed && dx!=0){
-            xpos = xpos + dx;
+        if (downPressed && dx!=0){
+            ypos = ypos + verticalSpeed;
         }
 
-        if (upPressed && !spacePressed && dx!=0 ){
-            ypos = ypos - dy;
-        }
-
-        if (downPressed && !spacePressed && dx!=0){
-            ypos = ypos + dy;
+        if (xpos<=80){
+            dx=0;
         }
 
 
@@ -144,13 +145,16 @@ public class BallorPointer {
         xpos=xpos - dx;
         ypos= ypos+ dy;
 
+        rec = new Rectangle((int) xpos, (int) ypos, width, height);
+
+
 
     }
     public void cyanMove() {
 
         if (dx < cyanMaxSpeed && !cyanMaxSpeedAchieved && !spacePressed) {
             dx = dx + GRAVITY;
-            score = score + 1;
+       //     score = score + 1;
 
             if(dx>7){
                 cyanMaxSpeedAchieved=true;
@@ -161,20 +165,18 @@ public class BallorPointer {
 
         }
 
-        if (leftPressed && !spacePressed && dx!=0){
-            xpos = xpos - dx;
+
+
+        if (upPressed && dx!=0){
+            ypos = ypos - verticalSpeed;
         }
 
-        if (rightPressed && !spacePressed && dx!=0){
-            xpos = xpos + dx;
+        if (downPressed && dx!=0){
+            ypos = ypos + verticalSpeed;
         }
 
-        if (upPressed && !spacePressed && dx!=0){
-            ypos = ypos - dy;
-        }
-
-        if (downPressed && !spacePressed && dx!=0){
-            ypos = ypos + dy;
+        if (xpos<=80){
+            dx=0;
         }
 
 
@@ -182,13 +184,16 @@ public class BallorPointer {
         xpos=xpos - dx;
         ypos= ypos+ dy;
 
+        rec = new Rectangle((int) xpos, (int) ypos, width, height);
+
+
 
     }
     public void greenMove() {
 
         if (dx < greenMaxSpeed && !greenMaxSpeedAchieved && !spacePressed) {
             dx = dx + GRAVITY;
-            score = score + 1;
+       //     score = score + 1;
 
             if(dx>6.5){
                 greenMaxSpeedAchieved=true;
@@ -199,20 +204,18 @@ public class BallorPointer {
 
         }
 
-        if (leftPressed && !spacePressed && dx!=0){
-            xpos = xpos - dx;
+
+
+        if (upPressed && dx!=0){
+            ypos = ypos - verticalSpeed;
         }
 
-        if (rightPressed && !spacePressed && dx!=0){
-            xpos = xpos + dx;
+        if (downPressed && dx!=0){
+            ypos = ypos + verticalSpeed;
         }
 
-        if (upPressed && !spacePressed && dx!=0){
-            ypos = ypos - dy;
-        }
-
-        if (downPressed && !spacePressed && dx!=0){
-            ypos = ypos + dy;
+        if (xpos<=80){
+            dx=0;
         }
 
 
@@ -221,13 +224,16 @@ public class BallorPointer {
         xpos=xpos - dx;
         ypos= ypos+ dy;
 
+        rec = new Rectangle((int) xpos, (int) ypos, width, height);
+
+
 
     }
     public void pinkMove() {
 
         if (dx < pinkMaxSpeed && !pinkMaxSpeedAchieved && !spacePressed) {
             dx = dx + GRAVITY;
-            score = score + 1;
+        //    score = score + 1;
 
             if(dx>6){
                 pinkMaxSpeedAchieved=true;
@@ -238,20 +244,17 @@ public class BallorPointer {
 
         }
 
-        if (leftPressed && !spacePressed && dx!=0){
-            xpos = xpos - dx;
+
+        if (upPressed && dx!=0){
+            ypos = ypos - verticalSpeed;
         }
 
-        if (rightPressed && !spacePressed && dx!=0){
-            xpos = xpos + dx;
+        if (downPressed && dx!=0){
+            ypos = ypos + verticalSpeed;
         }
 
-        if (upPressed && !spacePressed && dx!=0){
-            ypos = ypos - dy;
-        }
-
-        if (downPressed && !spacePressed && dx!=0){
-            ypos = ypos + dy;
+        if (xpos<=80){
+            dx=0;
         }
 
 
@@ -261,13 +264,16 @@ public class BallorPointer {
         xpos=xpos - dx;
         ypos= ypos+ dy;
 
+        rec = new Rectangle((int) xpos, (int) ypos, width, height);
+
+
 
     }
     public void redMove() {
 
         if (dx < redMaxSpeed && !redMaxSpeedAchieved && !spacePressed) {
             dx = dx + GRAVITY;
-            score = score + 1;
+        //    score = score + 1;
 
             if(dx>5.5){
                 redMaxSpeedAchieved=true;
@@ -278,20 +284,18 @@ public class BallorPointer {
 
         }
 
-        if (leftPressed && !spacePressed && dx!=0){
-            xpos = xpos - dx;
+        if (xpos<=80){
+            dx=0;
         }
 
-        if (rightPressed && !spacePressed && dx!=0){
-            xpos = xpos + dx;
+
+
+        if (upPressed && dx!=0){
+            ypos = ypos - verticalSpeed;
         }
 
-        if (upPressed && !spacePressed && dx!=0){
-            ypos = ypos - dy;
-        }
-
-        if (downPressed && !spacePressed && dx!=0){
-            ypos = ypos + dy;
+        if (downPressed && dx!=0){
+            ypos = ypos + verticalSpeed;
         }
 
 
@@ -300,13 +304,16 @@ public class BallorPointer {
         xpos=xpos - dx;
         ypos= ypos+ dy;
 
+        rec = new Rectangle((int) xpos, (int) ypos, width, height);
+
+
 
     }
     public void blueMove() {
 
         if (dx < blueMaxSpeed && !blueMaxSpeedAchieved && !spacePressed) {
             dx = dx + GRAVITY;
-            score = score + 1;
+        //    score = score + 1;
 
             if(dx>5){
                 blueMaxSpeedAchieved=true;
@@ -317,20 +324,18 @@ public class BallorPointer {
 
         }
 
-        if (leftPressed && !spacePressed && dx!=0){
-            xpos = xpos - dx;
+
+
+        if (upPressed && dx!=0){
+            ypos = ypos - verticalSpeed;
         }
 
-        if (rightPressed && !spacePressed && dx!=0){
-            xpos = xpos + dx;
+        if (downPressed && dx!=0){
+            ypos = ypos + verticalSpeed;
         }
 
-        if (upPressed && !spacePressed && dx!=0){
-            ypos = ypos - dy;
-        }
-
-        if (downPressed && !spacePressed && dx!=0){
-            ypos = ypos + dy;
+        if (xpos<=80){
+            dx=0;
         }
 
 
@@ -340,13 +345,16 @@ public class BallorPointer {
         xpos=xpos - dx;
         ypos= ypos+ dy;
 
+        rec = new Rectangle((int) xpos, (int) ypos, width, height);
+
+
 
     }
     public void blackMove() {
 
         if (dx < blackMaxSpeed && !blackMaxSpeedAchieved && !spacePressed) {
             dx = dx + GRAVITY;
-            score = score + 1;
+       //     score = score + 1;
 
             if(dx>=2){
                 blackMaxSpeedAchieved=true;
@@ -357,23 +365,20 @@ public class BallorPointer {
 
         }
 
-        if (leftPressed && !spacePressed && dx!=0){
-            xpos = xpos - dx;
+
+
+        if (upPressed && dx!=0){
+            ypos = ypos - verticalSpeed;
+            System.out.println("moving up");
         }
 
-        if (rightPressed && !spacePressed && dx!=0){
-            xpos = xpos + dx;
+        if (downPressed && dx!=0) {
+            ypos = ypos + verticalSpeed;
         }
 
-        if (upPressed && !spacePressed && dx!=0){
-            ypos = ypos - dy;
+        if (xpos<=80){
+            dx=0;
         }
-
-        if (downPressed && !spacePressed && dx!=0){
-            ypos = ypos + dy;
-        }
-
-
 
 
 
@@ -382,6 +387,9 @@ public class BallorPointer {
         // Update position
         xpos=xpos - dx;
         ypos= ypos+ dy;
+
+        rec = new Rectangle((int) xpos, (int) ypos, width, height);
+
 
 
     }
